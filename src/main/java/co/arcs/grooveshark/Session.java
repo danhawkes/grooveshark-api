@@ -27,9 +27,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 
+/**
+ * Represents a grant to communicate with the grooveshark API a limited period
+ * of time.
+ * <p>
+ * Sessions start off as 'anonymous': unassociated with a user.
+ * </p>
+ */
 class Session {
 
-	private final GroovesharkClient api;
+	private final Client client;
 	final String phpSession;
 	final long phpSessionCreatedTime;
 	final String secretKey;
@@ -37,12 +44,13 @@ class Session {
 	final JsonNode country;
 	@Nullable
 	String commsToken;
+	User user;
 
 	private static final long PHP_SESSION_LIFETIME = 60 * 60 * 24 * 7;
 
-	Session(GroovesharkClient api, HttpResponse response) throws JsonProcessingException,
-			IOException, GroovesharkException {
-		this.api = api;
+	Session(Client api, HttpResponse response) throws JsonProcessingException, IOException,
+			GroovesharkException {
+		this.client = api;
 		this.phpSession = extractPhpSession(response);
 		checkNotNull(phpSession);
 		phpSessionCreatedTime = new Date().getTime();
@@ -53,9 +61,9 @@ class Session {
 
 	}
 
-	Session(GroovesharkClient api, String phpSession, JsonNode country, String secretKey,
-			String uuid, String commsToken) {
-		this.api = api;
+	Session(Client api, String phpSession, JsonNode country, String secretKey, String uuid,
+			String commsToken) {
+		this.client = api;
 		this.phpSession = phpSession;
 		this.phpSessionCreatedTime = new Date().getTime();
 		this.country = country;
@@ -71,7 +79,7 @@ class Session {
 		Matcher matcher = Pattern.compile("window.tokenData = (.*);").matcher(responseBody);
 		if (matcher.find()) {
 			String json = matcher.group(1);
-			JsonNode rootNode = api.jsonMapper.readTree(new StringReader(json));
+			JsonNode rootNode = client.jsonMapper.readTree(new StringReader(json));
 			JsonNode gsConfigNode = rootNode.get("getGSConfig");
 			if (gsConfigNode != null) {
 				return gsConfigNode.get("country");
@@ -102,7 +110,7 @@ class Session {
 		return UUID.randomUUID().toString().toUpperCase(Locale.US);
 	}
 
-	void createOrRenewCommsToken() throws IOException, GroovesharkException {
+	void createCommsToken() throws IOException, GroovesharkException {
 		String method = "getCommunicationToken";
 
 		// Build JSON payload
@@ -126,21 +134,20 @@ class Session {
 			ObjectNode parameters = JsonNodeFactory.instance.objectNode();
 			parameters.put("secretKey", Session.this.secretKey);
 			rootNode.put("parameters", parameters);
-
 		}
 
 		// Build and send request
-		String url = "https://" + GroovesharkClient.DOMAIN + "/more.php#" + method;
+		String url = "https://" + Client.DOMAIN + "/more.php#" + method;
 		HttpPost httpRequest = new HttpPost(url);
 		httpRequest.setEntity(new StringEntity(rootNode.toString()));
-		HttpResponse httpResponse = api.httpClient.execute(httpRequest);
+		HttpResponse httpResponse = client.httpClient.execute(httpRequest);
 		String payload = CharStreams.toString(new InputStreamReader(httpResponse.getEntity()
 				.getContent(), Charsets.UTF_8));
 
 		// Parse response JSON
 		JsonNode jsonNode;
 		try {
-			jsonNode = api.jsonMapper.readTree(new StringReader(payload));
+			jsonNode = client.jsonMapper.readTree(new StringReader(payload));
 		} catch (JsonProcessingException e) {
 			throw new GroovesharkException.ServerErrorException(
 					"Failed to parse response - was not valid JSON: " + payload);
@@ -150,13 +157,28 @@ class Session {
 		this.commsToken = jsonNode.get("result").asText();
 	}
 
-	void createOrRenewCommsTokenAsRequired() throws IOException, GroovesharkException {
+	void createCommsTokenAsRequired() throws IOException, GroovesharkException {
 		if (commsToken == null) {
-			createOrRenewCommsToken();
+			createCommsToken();
 		}
 	}
 
 	boolean isExpired() {
-		return (phpSessionCreatedTime + PHP_SESSION_LIFETIME) > new Date().getTime();
+		return (phpSessionCreatedTime + PHP_SESSION_LIFETIME) < new Date().getTime();
+	}
+
+	/**
+	 * Marks this session as being authenticated and associated with a user.
+	 */
+	void setAuthenticated(User user) {
+		this.user = user;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	boolean hasUser() {
+		return (user != null);
 	}
 }

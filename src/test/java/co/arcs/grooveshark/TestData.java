@@ -2,18 +2,12 @@ package co.arcs.grooveshark;
 
 import java.io.IOException;
 
-import co.arcs.grooveshark.GroovesharkClient;
-import co.arcs.grooveshark.Session;
-import co.arcs.grooveshark.Song;
-import co.arcs.grooveshark.User;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestData {
 
-	public static final User USER = new User(25461291,
-			"a8da7cd573d12b14a0af9b11252de9d8@mailinator.com");
+	public static final long USER_ID = 25461291;
 	public static final String USER_NAME = "a8da7cd573d12b14a0af9b11252de9d8@mailinator.com";
 	public static final String USER_PASSWORD = "a8da7cd573d12b14a0af9b11252de9d8";
 	public static final Song SONG_1 = new Song(35951687, 490, 100204);
@@ -24,7 +18,7 @@ public class TestData {
 	static {
 		try {
 			SESSION_WITH_INVALID_PHP_SESSION = new Session(
-					new GroovesharkClient(),
+					new Client(),
 					"eb089e7241484dd421a379ba1c6190a2",
 					new ObjectMapper()
 							.readTree("{\"ID\":221,\"CC1\":0,\"CC2\":0,\"CC3\":0,\"CC4\":268435456,\"DMA\":0,\"IPR\":0}"),

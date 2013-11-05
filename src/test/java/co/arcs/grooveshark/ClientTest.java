@@ -11,29 +11,26 @@ import java.net.URL;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import co.arcs.grooveshark.GroovesharkClient;
-import co.arcs.grooveshark.GroovesharkException;
-
 import com.google.common.io.ByteStreams;
 
-public class GroovesharkClientTest extends GroovesharkApiTest {
+public class ClientTest extends GroovesharkApiTest {
 
-	static GroovesharkClient client;
+	static Client client;
 
 	@BeforeClass
 	public static void beforeClass() {
-		client = new GroovesharkClient();
+		client = new Client();
+		client.setDebugLoggingEnabled(true);
 	}
 
 	@Test
 	public void getUser() throws IOException, GroovesharkException {
-		client.getUser(TestData.USER_NAME, TestData.USER_PASSWORD);
+		client.login(TestData.USER_NAME, TestData.USER_PASSWORD);
 	}
 
 	@Test
 	public void getStreamUrl() throws IOException, GroovesharkException {
 		URL url = client.getStreamUrl(TestData.SONG_1);
-		System.out.println(url.toString());
 		assertNotNull(url);
 	}
 

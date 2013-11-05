@@ -1,10 +1,10 @@
 package co.arcs.grooveshark;
 
 /**
- * Exceptions returned by the Grooveshark API. These are not exposed in the
+ * Fault codes returned by the Grooveshark API. These are not exposed in the
  * public API as some are handled internally.
  */
-class GroovesharkInternalApiExceptionCodes {
+class FaultCodes {
 
 	public static final int EMPTY_RESULTS = -256;
 	public static final int INVALID_CLIENT = 1024;
