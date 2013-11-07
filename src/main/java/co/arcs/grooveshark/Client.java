@@ -221,7 +221,7 @@ public class Client {
 		return songs;
 	}
 
-	public List<Song> getPopularSongs() throws IOException, GroovesharkException {
+	public List<Song> searchPopularSongs() throws IOException, GroovesharkException {
 		JsonNode response = sendRequest(new RequestBuilder("popularGetSongs", false) {
 
 			@Override

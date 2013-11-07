@@ -22,43 +22,43 @@ public class UserTest extends GroovesharkApiTest {
 
 	@Test
 	public void getLibrary() throws IOException, GroovesharkException {
-		List<Song> songs = user.library.getSongs();
+		List<Song> songs = user.library.get();
 		assertTrue(songs.size() != 0);
 	}
 
 	@Test
 	public void addToLibraryOne() throws IOException, GroovesharkException {
-		assertTrue(user.library.addSong(TestData.SONG_1));
+		assertTrue(user.library.add(TestData.SONG_1));
 	}
 
 	@Test
 	public void addToLibraryMany() throws IOException, GroovesharkException {
-		assertTrue(user.library.addSong(TestData.SONG_1, TestData.SONG_2));
+		assertTrue(user.library.add(TestData.SONG_1, TestData.SONG_2));
 	}
 
 	@Test
 	public void removeFromLibraryOne() throws IOException, GroovesharkException {
-		assertTrue(user.library.removeSong(TestData.SONG_1));
+		assertTrue(user.library.remove(TestData.SONG_1));
 	}
 
 	@Test
 	public void removeFromLibraryMany() throws IOException, GroovesharkException {
-		assertTrue(user.library.removeSong(TestData.SONG_1, TestData.SONG_2));
+		assertTrue(user.library.remove(TestData.SONG_1, TestData.SONG_2));
 	}
 
 	@Test
 	public void getFavorites() throws IOException, GroovesharkException {
-		List<Song> songs = user.favorites.getSongs();
+		List<Song> songs = user.favorites.get();
 		assertTrue(songs.size() != 0);
 	}
 
 	@Test
 	public void addFavorite() throws IOException, GroovesharkException {
-		assertTrue(user.favorites.addSong(TestData.SONG_1));
+		assertTrue(user.favorites.add(TestData.SONG_1));
 	}
 
 	@Test
 	public void removeFavorite() throws IOException, GroovesharkException {
-		assertTrue(user.favorites.removeSong(TestData.SONG_1));
+		assertTrue(user.favorites.remove(TestData.SONG_1));
 	}
 }

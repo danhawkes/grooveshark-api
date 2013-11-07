@@ -48,7 +48,7 @@ public class User {
 
 	public class Library {
 
-		public List<Song> getSongs() throws IOException, GroovesharkException {
+		public List<Song> get() throws IOException, GroovesharkException {
 			// TODO if (hasMorePages) ...
 			JsonNode response = client.sendRequest(new RequestBuilder("userGetSongsInLibrary",
 					false) {
@@ -66,7 +66,7 @@ public class User {
 			return songs;
 		}
 
-		public boolean addSong(final Song... songs) throws IOException, GroovesharkException {
+		public boolean add(final Song... songs) throws IOException, GroovesharkException {
 			JsonNode response = client.sendRequest(new RequestBuilder("userAddSongsToLibrary",
 					false) {
 				@Override
@@ -84,7 +84,7 @@ public class User {
 			return response.get("result").get("Timestamps").has("newTSModified");
 		}
 
-		public boolean removeSong(final Song... songs) throws IOException, GroovesharkException {
+		public boolean remove(final Song... songs) throws IOException, GroovesharkException {
 			JsonNode response = client.sendRequest(new RequestBuilder("userRemoveSongsFromLibrary",
 					false) {
 				@Override
@@ -106,7 +106,7 @@ public class User {
 
 	public class Favorites {
 
-		public boolean addSong(final Song song) throws IOException, GroovesharkException {
+		public boolean add(final Song song) throws IOException, GroovesharkException {
 			JsonNode response = client.sendRequest(new RequestBuilder("favorite", false) {
 
 				@Override
@@ -118,7 +118,7 @@ public class User {
 			return response.get("result").get("success").asBoolean();
 		}
 
-		public boolean removeSong(final Song song) throws IOException, GroovesharkException {
+		public boolean remove(final Song song) throws IOException, GroovesharkException {
 			JsonNode response = client.sendRequest(new RequestBuilder("unfavorite", false) {
 
 				@Override
@@ -131,7 +131,7 @@ public class User {
 			return response.get("result").get("success").asBoolean();
 		}
 
-		public List<Song> getSongs() throws IOException, GroovesharkException {
+		public List<Song> get() throws IOException, GroovesharkException {
 			JsonNode response = client.sendRequest(new RequestBuilder("getFavorites", false) {
 
 				@Override

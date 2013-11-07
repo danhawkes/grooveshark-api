@@ -52,7 +52,7 @@ public class ClientTest extends GroovesharkApiTest {
 
 	@Test
 	public void getPopularSongs() throws IOException, GroovesharkException {
-		List<Song> songs = client.getPopularSongs();
+		List<Song> songs = client.searchPopularSongs();
 		assertTrue(songs.size() > 0);
 	}
 }
