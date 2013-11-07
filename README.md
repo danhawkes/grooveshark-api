@@ -70,7 +70,7 @@ Bug reports and pull requests are much appreciated.
 
 # Thanks
 
-To [sosedoff](https://github.com/sosedoff) and contibutors for providing API information in their [Ruby library](https://github.com/sosedoff/grooveshark).
+To [sosedoff](https://github.com/sosedoff) and contributors for providing API information in their [Ruby library](https://github.com/sosedoff/grooveshark).
 
 # Licence
 
