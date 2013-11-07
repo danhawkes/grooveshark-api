@@ -187,7 +187,7 @@ public class Client {
 		}
 	}
 
-	public URL getStreamUrl(final Song song) throws IOException, GroovesharkException {
+	public URL getStream(final Song song) throws IOException, GroovesharkException {
 		JsonNode response = sendRequest(new RequestBuilder("getStreamKeyFromSongIDEx", false) {
 			@Override
 			void populateParameters(Session session, ObjectNode parameters) {

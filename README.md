@@ -29,7 +29,7 @@ client.searchPopularSongs();
 Get a short-lived song URL:
 
 ```java
-client.getStreamUrl(Song);
+client.getUrl(Song);
 ```
 
 ### Login

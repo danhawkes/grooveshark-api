@@ -32,13 +32,13 @@ public class ClientTest extends GroovesharkApiTest {
 
 	@Test
 	public void getStreamUrl() throws IOException, GroovesharkException {
-		URL url = client.getStreamUrl(TestData.SONG_1);
+		URL url = client.getStream(TestData.SONG_1);
 		assertNotNull(url);
 	}
 
 	@Test
 	public void retrieveStream() throws IOException, GroovesharkException {
-		URL url = client.getStreamUrl(TestData.SONG_1);
+		URL url = client.getStream(TestData.SONG_1);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		InputStream is = new BufferedInputStream(connection.getInputStream());
 		ByteStreams.toByteArray(is);
