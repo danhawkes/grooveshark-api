@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -20,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Charsets;
+import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
 
 public class Client {
@@ -198,6 +202,39 @@ public class Client {
 		String ip = result.get("ip").asText();
 		String streamKey = result.get("streamKey").asText();
 		return new URL("http://" + ip + "/stream.php?streamKey=" + streamKey);
+	}
+
+	public List<Song> searchSongs(final String query) throws IOException, GroovesharkException {
+		JsonNode response = sendRequest(new RequestBuilder("getResultsFromSearch", false) {
+
+			@Override
+			void populateParameters(Session session, ObjectNode parameters) {
+				parameters.put("type", "Songs");
+				parameters.put("query", query);
+			}
+		});
+		ArrayList<Song> songs = Lists.newArrayList();
+		Iterator<JsonNode> elements = response.get("result").get("result").elements();
+		while (elements.hasNext()) {
+			songs.add(new Song(elements.next()));
+		}
+		return songs;
+	}
+
+	public List<Song> getPopularSongs() throws IOException, GroovesharkException {
+		JsonNode response = sendRequest(new RequestBuilder("popularGetSongs", false) {
+
+			@Override
+			void populateParameters(Session session, ObjectNode parameters) {
+				parameters.put("type", "daily");
+			}
+		});
+		ArrayList<Song> songs = Lists.newArrayList();
+		Iterator<JsonNode> elements = response.get("result").get("Songs").elements();
+		while (elements.hasNext()) {
+			songs.add(new Song(elements.next()));
+		}
+		return songs;
 	}
 
 	/**

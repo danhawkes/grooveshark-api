@@ -23,7 +23,7 @@ public class Song {
 
 	Song(JsonNode node) {
 		id = node.get("SongID").asLong();
-		name = node.get("Name").asText();
+		name = node.has("Name") ? node.get("Name").asText() : node.get("SongName").asText();
 		track = node.get("TrackNum").asInt();
 		duration = node.get("EstimateDuration").asInt();
 		coverArtFilename = node.get("CoverArtFilename").asText();

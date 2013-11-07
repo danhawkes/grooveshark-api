@@ -1,12 +1,14 @@
 package co.arcs.grooveshark;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,5 +42,17 @@ public class ClientTest extends GroovesharkApiTest {
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		InputStream is = new BufferedInputStream(connection.getInputStream());
 		ByteStreams.toByteArray(is);
+	}
+
+	@Test
+	public void searchSongs() throws IOException, GroovesharkException {
+		List<Song> songs = client.searchSongs("clair de lune");
+		assertTrue(songs.size() > 0);
+	}
+
+	@Test
+	public void getPopularSongs() throws IOException, GroovesharkException {
+		List<Song> songs = client.getPopularSongs();
+		assertTrue(songs.size() > 0);
 	}
 }
