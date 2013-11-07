@@ -13,6 +13,8 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import co.arcs.grooveshark.GroovesharkException.InvalidCredentialsException;
+
 import com.google.common.io.ByteStreams;
 
 public class ClientTest extends GroovesharkApiTest {
@@ -28,6 +30,11 @@ public class ClientTest extends GroovesharkApiTest {
 	@Test
 	public void getUser() throws IOException, GroovesharkException {
 		client.login(TestData.USER_NAME, TestData.USER_PASSWORD);
+	}
+
+	@Test(expected = InvalidCredentialsException.class)
+	public void getUserWithBadCredentials() throws IOException, GroovesharkException {
+		client.login(TestData.BAD_USER_NAME, TestData.BAD_USER_PASSWORD);
 	}
 
 	@Test

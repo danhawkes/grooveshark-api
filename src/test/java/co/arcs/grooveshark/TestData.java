@@ -10,6 +10,8 @@ public class TestData {
 	public static final long USER_ID = 25461291;
 	public static final String USER_NAME = "a8da7cd573d12b14a0af9b11252de9d8@mailinator.com";
 	public static final String USER_PASSWORD = "a8da7cd573d12b14a0af9b11252de9d8";
+	public static final String BAD_USER_NAME = "sdfibsdpigsdiubv@xw9t47.com";
+	public static final String BAD_USER_PASSWORD = "password";
 	public static final Song SONG_1 = new Song(35951687, 490, 100204);
 	public static final Song SONG_2 = new Song(35354896, 846, 140485);
 
