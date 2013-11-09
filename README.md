@@ -2,11 +2,11 @@
 
 An unofficial API for Grooveshark, in Java.
 
-# Installation
+[![Build Status](http://arcs.co/jenkins/buildStatus/icon?job=grooveshark-api)](http://arcs.co/jenkins/job/grooveshark-api/)
+
+## Installation
 
 ### Maven
-
-Add the repository to your POM:
 
 ```xml
 <repositories>
@@ -23,11 +23,11 @@ Add the repository to your POM:
 </dependency>
 ```
 
-### Jar:
+### Jar
 
-Download the jar directly: :[grooveshark-api-0.3.jar](https://arcs.co/archiva/repository/internal/co/arcs/grooveshark-api/0.3/grooveshark-api-0.3.jar)
+Download the latests jars here: [grooveshark-api](http://arcs.co/jenkins/job/grooveshark-api/)
 
-# Usage
+## Usage
 
 First off, you'll need a client:
 
@@ -81,7 +81,7 @@ user.favorites.add(song);
 user.favorites.remove(song);
 ```
 
-# Build / Test
+## Build / Test
 
 To build and run tests against the real servers:
 
@@ -89,14 +89,14 @@ To build and run tests against the real servers:
 mvn clean install
 ```
 
-# Contribute
+## Contribute
 
 Bug reports and pull requests are much appreciated.
 
-# Thanks
+## Thanks
 
 To [sosedoff](https://github.com/sosedoff) and contributors for providing API information in their [Ruby library](https://github.com/sosedoff/grooveshark).
 
-# Licence
+## Licence
 
 Apache 2.0. See `LICENCE.txt` for details.
