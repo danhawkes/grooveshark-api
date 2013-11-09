@@ -2,6 +2,31 @@
 
 An unofficial API for Grooveshark, in Java.
 
+# Installation
+
+### Maven
+
+Add the repository to your POM:
+
+```xml
+<repositories>
+	<repository>
+		<id>arcs.co</id>
+		<url>http://arcs.co/archiva/repository/internal</url>
+	</repository>
+</repositories>
+
+<dependency>
+	<groupId>co.arcs</groupId>
+	<artifactId>grooveshark-api</artifactId>
+	<version>0.4</version>
+</dependency>
+```
+
+### Jar:
+
+Download the jar directly: :[grooveshark-api-0.3.jar](https://arcs.co/archiva/repository/internal/co/arcs/grooveshark-api/0.3/grooveshark-api-0.3.jar)
+
 # Usage
 
 First off, you'll need a client:
