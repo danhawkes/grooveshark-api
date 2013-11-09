@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.arcs</groupId>
 	<artifactId>grooveshark-api</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 	<name>grooveshark-api</name>
 	<url>http://maven.apache.org</url>
