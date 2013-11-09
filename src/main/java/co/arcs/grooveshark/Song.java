@@ -84,9 +84,4 @@ public class Song {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Song [id=" + id + ", name=" + name + ", artistName=" + artistName + "]";
-	}
 }

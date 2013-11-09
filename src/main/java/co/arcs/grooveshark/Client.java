@@ -188,12 +188,16 @@ public class Client {
 	}
 
 	public URL getStream(final Song song) throws IOException, GroovesharkException {
+		return getStream(song.id);
+	}
+
+	public URL getStream(final long songId) throws IOException, GroovesharkException {
 		JsonNode response = sendRequest(new RequestBuilder("getStreamKeyFromSongIDEx", false) {
 			@Override
 			void populateParameters(Session session, ObjectNode parameters) {
 				parameters.put("type", 0);
 				parameters.put("prefetch", false);
-				parameters.put("songID", song.id);
+				parameters.put("songID", songId);
 				parameters.put("country", session.country);
 				parameters.put("mobile", false);
 			}
