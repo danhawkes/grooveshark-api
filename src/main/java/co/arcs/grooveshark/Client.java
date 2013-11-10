@@ -10,12 +10,15 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.message.BasicHeader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,21 +37,31 @@ public class Client {
 	final HttpClient httpClient;
 	final ObjectMapper jsonMapper;
 	private Session session;
+	private static final int TIMEOUT = 10000;
 
 	public Client() {
-		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(5000)
-				.setSocketTimeout(5000).setConnectionRequestTimeout(5000).build();
-		httpClient = HttpClients.custom().setDefaultRequestConfig(requestConfig)
-				.setMaxConnPerRoute(1000).setMaxConnTotal(1000).build();
+		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+		connectionManager.setDefaultMaxPerRoute(2);
+
+		RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(TIMEOUT)
+				.setSocketTimeout(TIMEOUT).setConnectionRequestTimeout(TIMEOUT).build();
+
+		List<BasicHeader> headers = Lists.newArrayList(new BasicHeader(HttpHeaders.CONNECTION,
+				"close"), new BasicHeader(HttpHeaders.ACCEPT_ENCODING, "gzip,deflate"));
+
+		httpClient = HttpClients.custom().setConnectionManager(connectionManager)
+				.setDefaultHeaders(headers).setDefaultRequestConfig(requestConfig).build();
+
+		jsonMapper = new ObjectMapper();
+	}
+
+	public Client(HttpClient httpClient) {
+		this.httpClient = httpClient;
 		jsonMapper = new ObjectMapper();
 	}
 
 	/**
-	 * Sends a request.
-	 * <p>
-	 * This method attempts to ensure the request is sent with a valid
-	 * {@link Session} by re
-	 * </p>
+	 * Sends a request, and keeps the connection open for re-use.
 	 * 
 	 * @param requestBuilder
 	 * @return JSON node containing the response body.
@@ -73,6 +86,7 @@ public class Client {
 			}
 
 			HttpPost httpRequest = requestBuilder.build(session);
+			httpRequest.setHeader(HttpHeaders.CONNECTION, "keep-alive");
 			try {
 				JsonNode jsonNode = executeRequest(httpRequest);
 
@@ -203,6 +217,9 @@ public class Client {
 			}
 		});
 		JsonNode result = response.get("result");
+		if (result.size() == 0) {
+			throw new GroovesharkException.ServerErrorException("Received empty response");
+		}
 		String ip = result.get("ip").asText();
 		String streamKey = result.get("streamKey").asText();
 		return new URL("http://" + ip + "/stream.php?streamKey=" + streamKey);
