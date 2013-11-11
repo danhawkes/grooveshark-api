@@ -11,7 +11,7 @@ An unofficial API for Grooveshark, in Java.
 ```xml
 <repositories>
 	<repository>
-		<id>arcs.co</id>
+		<id>co.arcs</id>
 		<url>http://arcs.co/archiva/repository/internal</url>
 	</repository>
 </repositories>
@@ -25,7 +25,7 @@ An unofficial API for Grooveshark, in Java.
 
 ### Jar
 
-Download the latests jars here: [grooveshark-api](http://arcs.co/jenkins/job/grooveshark-api/)
+Download the latests jars here: [grooveshark-api](https://arcs.co/archiva/browse/co.arcs/grooveshark-api)
 
 ## Usage
 
