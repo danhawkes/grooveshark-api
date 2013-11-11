@@ -19,7 +19,7 @@ An unofficial API for Grooveshark, in Java.
 <dependency>
 	<groupId>co.arcs</groupId>
 	<artifactId>grooveshark-api</artifactId>
-	<version>0.4</version>
+	<version>0.4.1</version>
 </dependency>
 ```
 
