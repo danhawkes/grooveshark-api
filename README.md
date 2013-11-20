@@ -1,12 +1,9 @@
-# Grooveshark-api
-
+# Thresher
 An unofficial API for Grooveshark, in Java.
 
-[![Build Status](http://arcs.co/jenkins/buildStatus/icon?job=grooveshark-api)](http://arcs.co/jenkins/job/grooveshark-api/)
+[![Build Status](http://arcs.co/jenkins/buildStatus/icon?job=thresher)](http://arcs.co/jenkins/job/thresher/)
 
 ## Installation
-
-### Maven
 
 ```xml
 <repositories>
@@ -17,15 +14,13 @@ An unofficial API for Grooveshark, in Java.
 </repositories>
 
 <dependency>
-	<groupId>co.arcs</groupId>
-	<artifactId>grooveshark-api</artifactId>
-	<version>0.4.1</version>
+	<groupId>co.arcs.groove</groupId>
+	<artifactId>thresher</artifactId>
+	<version>1.0.0</version>
 </dependency>
 ```
 
-### Jar
-
-Download the latests jars here: [grooveshark-api](https://arcs.co/archiva/browse/co.arcs/grooveshark-api)
+Alternatively, download the latest Jar [here](https://arcs.co/archiva/browse/co.arcs.groove/thresher).
 
 ## Usage
 
@@ -54,10 +49,11 @@ client.searchPopularSongs();
 Get a short-lived song URL:
 
 ```java
-client.getUrl(Song);
+client.getStreamUrl(Song);
 ```
 
-### Login
+
+### Log in
 
 ```java
 user = client.login("username", "hunter2");
@@ -86,16 +82,13 @@ user.favorites.remove(song);
 To build and run tests against the real servers:
 
 ```shell
-mvn clean install
+mvn clean test
 ```
 
-## Contribute
+## Notes
 
-Bug reports and pull requests are much appreciated.
-
-## Thanks
-
-To [sosedoff](https://github.com/sosedoff) and contributors for providing API information in their [Ruby library](https://github.com/sosedoff/grooveshark).
+Bug reports and pull requests are much appreciated.  
+Thanks to [sosedoff](https://github.com/sosedoff) and contributors for providing API information in their [Ruby library](https://github.com/sosedoff/grooveshark).
 
 ## Licence
 
