@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

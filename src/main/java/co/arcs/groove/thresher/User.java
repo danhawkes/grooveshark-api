@@ -1,11 +1,11 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import co.arcs.grooveshark.GroovesharkException.InvalidCredentialsException;
+import co.arcs.groove.thresher.GroovesharkException.InvalidCredentialsException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;

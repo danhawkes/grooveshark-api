@@ -1,6 +1,10 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import java.io.IOException;
+
+import co.arcs.groove.thresher.Client;
+import co.arcs.groove.thresher.Session;
+import co.arcs.groove.thresher.Song;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

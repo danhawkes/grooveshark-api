@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import java.security.SecureRandom;
 

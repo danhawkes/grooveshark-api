@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +7,11 @@ import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import co.arcs.groove.thresher.Client;
+import co.arcs.groove.thresher.GroovesharkException;
+import co.arcs.groove.thresher.Song;
+import co.arcs.groove.thresher.User;
 
 public class UserTest extends GroovesharkApiTest {
 

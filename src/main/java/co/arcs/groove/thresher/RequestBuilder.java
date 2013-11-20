@@ -1,10 +1,12 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+
+import co.arcs.groove.thresher.Utils;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;

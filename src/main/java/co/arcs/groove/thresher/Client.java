@@ -1,6 +1,7 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
@@ -201,11 +202,11 @@ public class Client {
 		}
 	}
 
-	public URL getStream(final Song song) throws IOException, GroovesharkException {
-		return getStream(song.id);
+	public URL getStreamUrl(final Song song) throws IOException, GroovesharkException {
+		return getStreamUrl(song.id);
 	}
 
-	public URL getStream(final long songId) throws IOException, GroovesharkException {
+	public URL getStreamUrl(final long songId) throws IOException, GroovesharkException {
 		JsonNode response = sendRequest(new RequestBuilder("getStreamKeyFromSongIDEx", false) {
 			@Override
 			void populateParameters(Session session, ObjectNode parameters) {
@@ -223,6 +224,15 @@ public class Client {
 		String ip = result.get("ip").asText();
 		String streamKey = result.get("streamKey").asText();
 		return new URL("http://" + ip + "/stream.php?streamKey=" + streamKey);
+	}
+
+	public InputStream getStream(final Song song) throws IOException, GroovesharkException {
+		return getStream(song.id);
+	}
+
+	public InputStream getStream(final long songId) throws IOException, GroovesharkException {
+		HttpResponse response = httpClient.execute(new HttpGet(getStreamUrl(songId).toString()));
+		return response.getEntity().getContent();
 	}
 
 	public List<Song> searchSongs(final String query) throws IOException, GroovesharkException {

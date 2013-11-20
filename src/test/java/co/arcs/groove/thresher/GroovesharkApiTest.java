@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 
 public abstract class GroovesharkApiTest {

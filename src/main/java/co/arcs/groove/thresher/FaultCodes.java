@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 /**
  * Fault codes returned by the Grooveshark API. These are not exposed in the

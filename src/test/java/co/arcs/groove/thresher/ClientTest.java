@@ -1,4 +1,4 @@
-package co.arcs.grooveshark;
+package co.arcs.groove.thresher;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -13,7 +13,10 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import co.arcs.grooveshark.GroovesharkException.InvalidCredentialsException;
+import co.arcs.groove.thresher.Client;
+import co.arcs.groove.thresher.GroovesharkException;
+import co.arcs.groove.thresher.Song;
+import co.arcs.groove.thresher.GroovesharkException.InvalidCredentialsException;
 
 import com.google.common.io.ByteStreams;
 
@@ -39,13 +42,13 @@ public class ClientTest extends GroovesharkApiTest {
 
 	@Test
 	public void getStreamUrl() throws IOException, GroovesharkException {
-		URL url = client.getStream(TestData.SONG_1);
+		URL url = client.getStreamUrl(TestData.SONG_1);
 		assertNotNull(url);
 	}
 
 	@Test
 	public void retrieveStream() throws IOException, GroovesharkException {
-		URL url = client.getStream(TestData.SONG_1);
+		URL url = client.getStreamUrl(TestData.SONG_1);
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		InputStream is = new BufferedInputStream(connection.getInputStream());
 		ByteStreams.toByteArray(is);
@@ -53,7 +56,7 @@ public class ClientTest extends GroovesharkApiTest {
 
 	@Test
 	public void searchSongs() throws IOException, GroovesharkException {
-		List<Song> songs = client.searchSongs("clair de lune");
+		List<Song> songs = client.searchSongs("indigo jam unit 5am");
 		assertTrue(songs.size() > 0);
 	}
 
