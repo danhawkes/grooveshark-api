@@ -2,16 +2,11 @@ package co.arcs.groove.thresher;
 
 import java.io.IOException;
 
-import co.arcs.groove.thresher.Client;
-import co.arcs.groove.thresher.Session;
-import co.arcs.groove.thresher.Song;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestData {
 
-	public static final long USER_ID = 25461291;
 	public static final String USER_NAME = "a8da7cd573d12b14a0af9b11252de9d8@mailinator.com";
 	public static final String USER_PASSWORD = "a8da7cd573d12b14a0af9b11252de9d8";
 	public static final String BAD_USER_NAME = "sdfibsdpigsdiubv@xw9t47.com";
