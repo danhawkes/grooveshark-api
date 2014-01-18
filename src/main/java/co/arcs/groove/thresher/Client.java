@@ -20,6 +20,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -32,13 +33,13 @@ import com.google.common.io.CharStreams;
 
 public class Client {
 
-	protected static final String DOMAIN = "grooveshark.com";
+	static final String DOMAIN = "grooveshark.com";
+	private static final int TIMEOUT = 10000;
 
 	private boolean debugLogging = false;
 	final HttpClient httpClient;
 	final ObjectMapper jsonMapper;
 	private Session session;
-	private static final int TIMEOUT = 10000;
 
 	public Client() {
 		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
@@ -50,15 +51,10 @@ public class Client {
 		List<BasicHeader> headers = Lists.newArrayList(new BasicHeader(HttpHeaders.CONNECTION,
 				"close"), new BasicHeader(HttpHeaders.ACCEPT_ENCODING, "gzip,deflate"));
 
-		httpClient = HttpClients.custom().setConnectionManager(connectionManager)
+		this.httpClient = HttpClients.custom().setConnectionManager(connectionManager)
 				.setDefaultHeaders(headers).setDefaultRequestConfig(requestConfig).build();
 
-		jsonMapper = new ObjectMapper();
-	}
-
-	public Client(HttpClient httpClient) {
-		this.httpClient = httpClient;
-		jsonMapper = new ObjectMapper();
+		this.jsonMapper = new ObjectMapper();
 	}
 
 	/**
@@ -202,6 +198,29 @@ public class Client {
 		}
 	}
 
+	public InputStream getStream(final Song song) throws IOException, GroovesharkException {
+		return getStream(song.id);
+	}
+
+	public InputStream getStream(final long songId) throws IOException, GroovesharkException {
+		return getStreamResponse(songId).getEntity().getContent();
+	}
+
+	public HttpResponse getStreamResponse(final Song song) throws IOException, GroovesharkException {
+		return getStreamResponse(song.id);
+	}
+
+	public HttpResponse getStreamResponse(final long songId) throws IOException,
+			GroovesharkException {
+		HttpResponse response = httpClient.execute(new HttpGet(getStreamUrl(songId).toString()));
+		int statusCode = response.getStatusLine().getStatusCode();
+		if (statusCode != 200) {
+			EntityUtils.consumeQuietly(response.getEntity());
+			throw new IOException("API returned " + statusCode + " status code");
+		}
+		return response;
+	}
+
 	public URL getStreamUrl(final Song song) throws IOException, GroovesharkException {
 		return getStreamUrl(song.id);
 	}
@@ -224,15 +243,6 @@ public class Client {
 		String ip = result.get("ip").asText();
 		String streamKey = result.get("streamKey").asText();
 		return new URL("http://" + ip + "/stream.php?streamKey=" + streamKey);
-	}
-
-	public InputStream getStream(final Song song) throws IOException, GroovesharkException {
-		return getStream(song.id);
-	}
-
-	public InputStream getStream(final long songId) throws IOException, GroovesharkException {
-		HttpResponse response = httpClient.execute(new HttpGet(getStreamUrl(songId).toString()));
-		return response.getEntity().getContent();
 	}
 
 	public List<Song> searchSongs(final String query) throws IOException, GroovesharkException {
