@@ -16,7 +16,7 @@ An unofficial API for Grooveshark, in Java.
 <dependency>
 	<groupId>co.arcs.groove</groupId>
 	<artifactId>thresher</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 </dependency>
 ```
 
