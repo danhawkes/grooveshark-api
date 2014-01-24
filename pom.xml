@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.arcs.groove</groupId>
 	<artifactId>thresher</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
 	<name>thresher</name>
 	<properties>
@@ -15,6 +15,10 @@
 			<id>mashape-releases</id>
 			<url>http://maven.mashape.com/releases</url>
 		</repository>
+		<repository>
+			<id>arcs.co</id>
+			<url>http://arcs.co/archiva/repository/internal</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -24,9 +28,9 @@
 			<version>15.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.1</version>
+			<groupId>ch.boye</groupId>
+			<artifactId>httpclientandroidlib</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

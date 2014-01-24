@@ -2,9 +2,8 @@ package co.arcs.groove.thresher;
 
 import java.io.UnsupportedEncodingException;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+import ch.boye.httpclientandroidlib.client.methods.HttpPost;
+import ch.boye.httpclientandroidlib.entity.StringEntity;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
