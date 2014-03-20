@@ -1,12 +1,11 @@
 package co.arcs.groove.thresher;
 
-import java.io.UnsupportedEncodingException;
-
 import ch.boye.httpclientandroidlib.client.methods.HttpPost;
 import ch.boye.httpclientandroidlib.entity.StringEntity;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 
 /**
@@ -52,11 +51,7 @@ abstract class RequestBuilder {
 		// Build request object
 		String url = (secure ? "https" : "http") + "://" + Client.DOMAIN + "/more.php#" + method;
 		HttpPost httpRequest = new HttpPost(url);
-		try {
-			httpRequest.setEntity(new StringEntity(rootNode.toString()));
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+		httpRequest.setEntity(new StringEntity(rootNode.toString(), Charsets.UTF_8));
 		return httpRequest;
 	}
 
