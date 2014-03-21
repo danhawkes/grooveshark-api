@@ -1,7 +1,7 @@
 # Thresher
 An unofficial API for Grooveshark, in Java.
 
-[![Build Status](http://arcs.co/jenkins/buildStatus/icon?job=thresher)](http://arcs.co/jenkins/job/thresher/)
+[![Build Status](https://arcs.co/jenkins/buildStatus/icon?job=thresher)](https://arcs.co/jenkins/job/thresher/)
 
 ## Installation
 
@@ -9,7 +9,7 @@ An unofficial API for Grooveshark, in Java.
 <repositories>
 	<repository>
 		<id>co.arcs</id>
-		<url>http://arcs.co/archiva/repository/internal</url>
+		<url>https://arcs.co/archiva/repository/external</url>
 	</repository>
 </repositories>
 
@@ -20,7 +20,7 @@ An unofficial API for Grooveshark, in Java.
 </dependency>
 ```
 
-Alternatively, download the latest Jar [here](https://arcs.co/archiva/browse/co.arcs.groove/thresher).
+Alternatively, download the latest Jar [here](https://arcs.co/archiva/#artifact/co.arcs.groove/thresher).
 
 ## Usage
 
