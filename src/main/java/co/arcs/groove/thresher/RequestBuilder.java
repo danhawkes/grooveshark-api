@@ -1,12 +1,11 @@
 package co.arcs.groove.thresher;
 
+import com.belladati.httpclientandroidlib.client.methods.HttpPost;
+import com.belladati.httpclientandroidlib.entity.StringEntity;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
-
-import ch.boye.httpclientandroidlib.client.methods.HttpPost;
-import ch.boye.httpclientandroidlib.entity.StringEntity;
 
 /**
  * Builder class for API requests that depend on a valid {@link Session}.

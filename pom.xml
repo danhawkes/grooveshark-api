@@ -29,9 +29,9 @@
             <version>15.0</version>
         </dependency>
         <dependency>
-            <groupId>ch.boye</groupId>
+            <groupId>com.belladati</groupId>
             <artifactId>httpclientandroidlib</artifactId>
-            <version>1.2.0</version>
+            <version>4.3.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -1,5 +1,10 @@
 package co.arcs.groove.thresher;
 
+import com.belladati.httpclientandroidlib.Header;
+import com.belladati.httpclientandroidlib.HeaderElement;
+import com.belladati.httpclientandroidlib.HttpResponse;
+import com.belladati.httpclientandroidlib.client.methods.HttpPost;
+import com.belladati.httpclientandroidlib.entity.StringEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -17,12 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
-
-import ch.boye.httpclientandroidlib.Header;
-import ch.boye.httpclientandroidlib.HeaderElement;
-import ch.boye.httpclientandroidlib.HttpResponse;
-import ch.boye.httpclientandroidlib.client.methods.HttpPost;
-import ch.boye.httpclientandroidlib.entity.StringEntity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

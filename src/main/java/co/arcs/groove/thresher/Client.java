@@ -1,5 +1,17 @@
 package co.arcs.groove.thresher;
 
+import com.belladati.httpclientandroidlib.HttpHeaders;
+import com.belladati.httpclientandroidlib.HttpResponse;
+import com.belladati.httpclientandroidlib.client.HttpClient;
+import com.belladati.httpclientandroidlib.client.config.RequestConfig;
+import com.belladati.httpclientandroidlib.client.methods.HttpGet;
+import com.belladati.httpclientandroidlib.client.methods.HttpPost;
+import com.belladati.httpclientandroidlib.client.methods.HttpRequestBase;
+import com.belladati.httpclientandroidlib.entity.BufferedHttpEntity;
+import com.belladati.httpclientandroidlib.impl.client.HttpClients;
+import com.belladati.httpclientandroidlib.impl.conn.PoolingHttpClientConnectionManager;
+import com.belladati.httpclientandroidlib.message.BasicHeader;
+import com.belladati.httpclientandroidlib.util.EntityUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,19 +31,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Nullable;
-
-import ch.boye.httpclientandroidlib.HttpHeaders;
-import ch.boye.httpclientandroidlib.HttpResponse;
-import ch.boye.httpclientandroidlib.client.HttpClient;
-import ch.boye.httpclientandroidlib.client.config.RequestConfig;
-import ch.boye.httpclientandroidlib.client.methods.HttpGet;
-import ch.boye.httpclientandroidlib.client.methods.HttpPost;
-import ch.boye.httpclientandroidlib.client.methods.HttpRequestBase;
-import ch.boye.httpclientandroidlib.entity.BufferedHttpEntity;
-import ch.boye.httpclientandroidlib.impl.client.HttpClients;
-import ch.boye.httpclientandroidlib.impl.conn.PoolingHttpClientConnectionManager;
-import ch.boye.httpclientandroidlib.message.BasicHeader;
-import ch.boye.httpclientandroidlib.util.EntityUtils;
 
 public class Client {
 
