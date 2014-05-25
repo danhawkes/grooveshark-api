@@ -112,13 +112,13 @@
 
     <distributionManagement>
         <repository>
-            <id>archiva.internal</id>
-            <name>Internal Release Repository</name>
-            <url>https://arcs.co/archiva/repository/internal/</url>
+            <id>archiva.external</id>
+            <name>Archiva External</name>
+            <url>https://arcs.co/archiva/repository/external/</url>
         </repository>
         <snapshotRepository>
             <id>archiva.snapshots</id>
-            <name>Internal Snapshot Repository</name>
+            <name>Archiva Snapshots</name>
             <url>https://arcs.co/archiva/repository/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
