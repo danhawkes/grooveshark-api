@@ -3,28 +3,29 @@ An unofficial API for Grooveshark, in Java.
 
 [![Build Status](https://arcs.co/jenkins/buildStatus/icon?job=thresher)](https://arcs.co/jenkins/job/thresher/)
 
-## Installation
+## Download
+
+With Maven:
 
 ```xml
-<repositories>
-	<repository>
-		<id>co.arcs</id>
-		<url>https://arcs.co/archiva/repository/external</url>
-	</repository>
-</repositories>
-
 <dependency>
 	<groupId>co.arcs.groove</groupId>
 	<artifactId>thresher</artifactId>
-	<version>1.1.1</version>
+	<version>X.X.X</version>
 </dependency>
 ```
 
-Alternatively, download the latest Jar [here](https://arcs.co/archiva/#artifact/co.arcs.groove/thresher).
+Or Gradle:
+
+```groovy
+compile 'co.arcs.groove:thresher:X.X.X'
+```
+
+Find the latest version on [maven central](http://search.maven.org/#search|ga|1|g%3A%22co.arcs.groove%22%20AND%20a%3A%22thresher%22).
 
 ## Usage
 
-First off, you'll need a client:
+All API requests go through a client object:
 
 ```java
 client = new Client();
@@ -55,26 +56,26 @@ client.getStreamUrl(Song);
 
 ### Log in
 
+Log in to get access a user's data:
+
 ```java
 user = client.login("username", "hunter2");
 ```
 
-### Library / Favorites
-
-List contents: 
+List the contents of their library and favorites: 
 
 ```java
-user.library.get();
-user.favorites.get();
+user.library().get();
+user.favorites().get();
 ```
 
-Add/Remove songs:
+Add or remove songs:
 
 ```java
-user.library.add(song);
-user.library.remove(song);
-user.favorites.add(song);
-user.favorites.remove(song);
+user.library().add(song);
+user.library().remove(song);
+user.favorites().add(song);
+user.favorites().remove(song);
 ```
 
 ## Build / Test
