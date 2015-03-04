@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
 public class Client {
 
     static final String DOMAIN = "grooveshark.com";
-    private static final int TIMEOUT = 10000;
+    public static int requestTimeout = 10000;
 
     private boolean debugLogging = false;
     private final HttpClient httpClient;
@@ -322,6 +322,11 @@ public class Client {
             songs.add(new Song(elements.next()));
         }
         return songs;
+    }
+    
+    public void setTimeout(int time)
+    {
+        requestTimeout = time;
     }
 
     /**
